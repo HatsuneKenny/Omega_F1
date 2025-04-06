@@ -2,6 +2,8 @@ import pytest
 import joblib
 import numpy as np
 import pandas as pd
+import sys
+sys.path.insert(0, 'vendor')
 
 # Načteme model a encodery
 model = joblib.load("../models/f1_winner_model.pkl")
