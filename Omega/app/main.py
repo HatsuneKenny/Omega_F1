@@ -5,8 +5,10 @@ import joblib
 import yaml
 import os
 import logging
-
 from sklearn.ensemble import RandomForestClassifier
+import sys
+sys.path.insert(0, 'vendor')
+
 
 # ⚙️ Konfigurace loggeru
 logging.basicConfig(
