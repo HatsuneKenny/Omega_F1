@@ -6,6 +6,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import accuracy_score
 import os
+import sys
+sys.path.insert(0, 'vendor')
 
 # Načtení datasetu
 df = pd.read_csv("f1_race_results.csv")
