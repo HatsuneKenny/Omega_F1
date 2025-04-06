@@ -1,0 +1,19 @@
+data_path: "f1_race_results.csv"
+
+model_paths:
+  random_forest: "models/f1_winner_model.pkl"
+  neural_network: "models/f1_mlp_model.pkl"
+
+encoding_paths:
+  random_forest:
+    circuit: "encoders/enc_circuit.pkl"
+    constructor: "encoders/enc_constructor.pkl"
+    driver: "encoders/enc_driver.pkl"
+
+  neural_network:
+    circuit: "encoders/enc_mlp_circuit.pkl"
+    constructor: "encoders/enc_mlp_constructor.pkl"
+    driver: "encoders/enc_mlp_driver.pkl"
+
+default_values:
+  grid_position: 5

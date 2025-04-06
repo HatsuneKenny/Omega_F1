@@ -1,0 +1,27 @@
+2025-04-04 13:18:25,446 - ERROR - Model nebo encodery se nepodařilo načíst.
+2025-04-04 13:18:28,992 - ERROR - Model nebo encodery se nepodařilo načíst.
+2025-04-04 13:18:37,799 - ERROR - Model nebo encodery se nepodařilo načíst.
+2025-04-04 13:18:40,714 - ERROR - Model nebo encodery se nepodařilo načíst.
+2025-04-04 13:18:43,176 - ERROR - Model nebo encodery se nepodařilo načíst.
+2025-04-04 13:18:43,991 - INFO - Predikce: season=2023, circuit=Silverstone Circuit, team=Red Bull, driver=Verstappen, grid=4, result=0.7400
+2025-04-04 13:18:43,992 - ERROR - Model nebo encodery se nepodařilo načíst.
+2025-04-04 13:21:13,167 - INFO - Predikce: season=2023, circuit=Baku City Circuit, team=Alpine F1 Team, driver=Gasly, grid=7, result=0.0000
+2025-04-04 13:21:29,398 - INFO - Predikce: season=2023, circuit=Baku City Circuit, team=Alpine F1 Team, driver=Gasly, grid=7, result=0.0000
+2025-04-06 14:41:10,197 - ERROR - Model nebo encodery se nepodařilo načíst: Soubor modelu f1_rf_model.pkl nenalezen.
+2025-04-06 14:41:14,981 - ERROR - Model nebo encodery se nepodařilo načíst: Soubor modelu f1_mlp_model.pkl nenalezen.
+2025-04-06 14:41:15,753 - ERROR - Model nebo encodery se nepodařilo načíst: Soubor modelu f1_rf_model.pkl nenalezen.
+2025-04-06 14:51:30,189 - ERROR - Model nebo encodery se nepodařilo načíst: Soubor modelu f1_rf_model.pkl nenalezen.
+2025-04-06 14:51:31,788 - ERROR - Model nebo encodery se nepodařilo načíst: 'circuit'
+2025-04-06 14:51:32,302 - ERROR - Model nebo encodery se nepodařilo načíst: Soubor modelu f1_rf_model.pkl nenalezen.
+2025-04-06 14:51:33,426 - ERROR - Model nebo encodery se nepodařilo načíst: 'circuit'
+2025-04-06 14:52:16,032 - ERROR - Model nebo encodery se nepodařilo načíst: Soubor modelu f1_rf_model.pkl nenalezen.
+2025-04-06 14:52:17,368 - ERROR - Model nebo encodery se nepodařilo načíst: 'circuit'
+2025-04-06 14:52:18,069 - ERROR - Model nebo encodery se nepodařilo načíst: Soubor modelu f1_rf_model.pkl nenalezen.
+2025-04-06 14:53:12,983 - ERROR - Model nebo encodery se nepodařilo načíst: 'circuit'
+2025-04-06 14:53:16,014 - ERROR - Model nebo encodery se nepodařilo načíst: 'circuit'
+2025-04-06 14:53:16,639 - ERROR - Model nebo encodery se nepodařilo načíst: 'circuit'
+2025-04-06 14:54:16,651 - ERROR - Model nebo encodery se nepodařilo načíst: [Errno 2] No such file or directory: 'enc_circuit_.pkl'
+2025-04-06 14:59:11,020 - INFO - [Random Forest] Predikce: season=2000, circuit=Circuit de Monaco, team=Ferrari, driver=Schumacher, grid=6, result=0.0300
+2025-04-06 14:59:18,028 - INFO - [Neuronová síť] Predikce: season=2000, circuit=Circuit de Monaco, team=Ferrari, driver=Schumacher, grid=6, result=0.0016
+2025-04-06 14:59:28,971 - INFO - [Random Forest] Predikce: season=2000, circuit=Circuit de Monaco, team=Ferrari, driver=Schumacher, grid=6, result=0.0300
+2025-04-06 14:59:31,715 - INFO - [Neuronová síť] Predikce: season=2000, circuit=Circuit de Monaco, team=Ferrari, driver=Schumacher, grid=6, result=0.0016
