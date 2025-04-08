@@ -5,19 +5,17 @@ import joblib
 import yaml
 import os
 import logging
-from sklearn.ensemble import RandomForestClassifier
 import sys
-sys.path.insert(0, 'vendor')
+from sklearn.ensemble import RandomForestClassifier
 
-
-# ⚙️ Konfigurace loggeru
+#  Zde loggujes hnupe
 logging.basicConfig(
     filename='f1_app.log',
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
-# 📂 Načtení konfigurace
+#  Tady se nacita confing soubor(config.yaml)
 with open("config.yaml", "r") as f:
     config = yaml.safe_load(f)
 
@@ -26,18 +24,18 @@ MODEL_PATHS = config["model_paths"]
 ENCODING_PATHS_ALL = config["encoding_paths"]
 DEFAULT_GRID = config["default_values"]["grid_position"]
 
-# 🌟 Streamlit hlavička
+#  Tu vytvaris hlavicku Streamlitu magore(jmeno stranky, layout, nadpis, apod...)
 st.set_page_config(page_title="F1 Winner Predictor", layout="wide")
 st.markdown("""
     <h1 style='text-align: center; color: #ff4b4b;'>🏎️ F1 Winner Predictor</h1>
     <p style='text-align: center; color: gray;'>Zjisti pravděpodobnost výhry jezdce podle historických dat</p>
 """, unsafe_allow_html=True)
 
-# 📃 Dataset pro možnosti
+#  Kontrola jestli dataset vubec existuje(jestli neni treba smazany)
 try:
     df = pd.read_csv(DATA_PATH)
 except Exception as e:
-    st.error("Nepodařilo se načíst dataset.")
+    st.error("Nepodařilo se načíst dataset.") # pokud nebyl nalezen vyhodi se chyba
     logging.error(f"Dataset error: {e}")
     st.stop()
 
@@ -45,13 +43,13 @@ available_seasons = sorted(df["Season"].unique())
 circuit_names = df["Circuit"].unique()
 constructor_names = df["Constructor"].unique()
 
-# 🔢 Volba modelu
+#  Tady se uzivatel vybere mezi modelama(RF a MLP). Ke kazdemu modelu jsou prirazene encodery
 model_choice = st.radio("Vyber model:", ["Random Forest", "Neuronová síť"])
 model_key = "random_forest" if model_choice == "Random Forest" else "neural_network"
 model_path = MODEL_PATHS[model_key]
 encoding_paths = ENCODING_PATHS_ALL[model_key]
 
-# 🔧 Načtení modelu a encoderů
+#  Nacteni modelu a encoderu zda existuji(jestli ne vyhodi se chyba)
 try:
     if not os.path.exists(model_path):
         raise FileNotFoundError(f"Soubor modelu {model_path} nenalezen.")
@@ -65,7 +63,7 @@ except Exception as e:
     st.error("Model nebo encodery se nepodařilo načíst. Zkontroluj soubory a konfiguraci.")
     st.stop()
 
-# 📄 UI vstupy
+#  Tady se vytvari UI
 st.markdown("---")
 st.markdown("### 📊 Zadej parametry závodu")
 
@@ -77,7 +75,7 @@ with col2:
     circuit = st.selectbox("Okruh", circuit_names)
     grid_pos = st.number_input("Startovní pozice", min_value=1, max_value=30, value=DEFAULT_GRID)
 
-# Jezdec z dostupných
+# Kontrolo toho aby uzivatele nezadal blbost
 df_raw = pd.read_csv(DATA_PATH)
 filtered = df_raw[
     (df_raw["Season"] == season) &
