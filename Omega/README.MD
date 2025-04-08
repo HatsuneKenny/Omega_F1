@@ -1,15 +1,15 @@
-# 📄 Dokumentace k projektu: Predikce vítěze závodu Formule 1 pomocí strojového učení
+#  Dokumentace k projektu: Predikce vítěze závodu Formule 1 pomocí strojového učení
 
 ---
 
-## 🧠 Popis projektu
+## Popis projektu
 Cílem projektu je vytvořit predikční model, který bude na základě reálných historických dat 
 odhadovat pravděpodobnost výhry jezdce Formule 1. 
 Projekt zahrnuje sběr dat, jejich zpracování, trénování modelu, vizualizace výsledků, a uživatelské rozhraní pomocí Streamlit.
 
 ---
 
-## 🛠 Použité technologie
+## Použité technologie
 - Python 3
 - Pandas, NumPy
 - scikit-learn
@@ -19,7 +19,7 @@ Projekt zahrnuje sběr dat, jejich zpracování, trénování modelu, vizualizac
 
 ---
 
-## 📦 Dataset
+## Dataset
 - Název souboru: `f1_race_results.csv`
 - Počet záznamů: cca 9600(povinný počet 1500+)
 - Atributy:
@@ -33,7 +33,7 @@ Projekt zahrnuje sběr dat, jejich zpracování, trénování modelu, vizualizac
 
 ---
 
-## 🧹 Předzpracování dat
+## Předzpracování dat
 - Výběr relevantních sloupců
 - Label encoding pro textové proměnné
 - Odstranění prázdných hodnot
@@ -41,99 +41,129 @@ Projekt zahrnuje sběr dat, jejich zpracování, trénování modelu, vizualizac
 
 ---
 
-## 🤖 Typ modelu
-Použitý algoritmus: **Random Forest Classifier**  
-Jedná se o **binární klasifikaci** – model předpovídá, zda jezdec vyhraje závod (1) nebo ne (0).
+## Typy modelů
+Použité algoritmy:
+- **Random Forest Classifier** – binární klasifikace
+- **Multi-Layer Perceptron (Neuronová síť)** – také klasifikace
+
+Oba modely lze mezi sebou porovnat pomocí `compare_models.py` a vybrat ve Streamlit aplikaci.
 
 ---
 
-## 📈 Vyhodnocení modelu
-- Přesnost modelu (accuracy score)
-- Confusion Matrix
-- Classification Report (precision, recall, F1-score)
-- Vizualizace pomocí heatmap a grafů přesnosti dle sezóny
+## Vyhodnocení modelu
+- Accuracy score (přesnost)
+- R² score (koeficient determinace)
+- Classification report (precision, recall, F1-score)
+- Confusion Matrix (vizualizace pomocí seaborn)
 
 ---
 
-## 💻 Uživatelské rozhraní (Streamlit app)
-- Název: `app.py`
-- Výběr:
-  - sezóny
-  - okruhu
-  - týmu
-  - jezdce (filtruje se dle výběru)
+## Uživatelské rozhraní (Streamlit app)
+- Název: `main.py`
+- Možnosti výběru:
+  - model (Random Forest / Neuronová síť)
+  - sezóna
+  - okruh
+  - tým
+  - jezdec (filtruje se dle týmu a sezóny)
   - startovní pozice
-- Výstup: Pravděpodobnost výhry v procentech
-- Ochrana před chybným vstupem: kontrola, zda daná kombinace existuje v datech
-- Proč Streamlit a jak jsem na něj přišel: https://chatgpt.com/share/67efbd2e-def8-800c-82bc-c0b2f7705e7d
+- Ochrana vstupu: kontroluje, zda daná kombinace existuje v datech
+- Výsledek: pravděpodobnost výhry v %
+
 ---
 
-## ⚙️ Konfigurace aplikace
+## Konfigurace aplikace
 Konfigurační soubor `config.yaml`:
 ```yaml
 # config.yaml
 
 data_path: "f1_race_results.csv"
-model_path: "f1_winner_model.pkl"
+
+model_paths:
+  random_forest: "models/f1_winner_model.pkl"
+  neural_network: "models/f1_mlp_model.pkl"
+
 encoding_paths:
-  circuit: "enc_circuit.pkl"
-  constructor: "enc_constructor.pkl"
-  driver: "enc_driver.pkl"
+  random_forest:
+    circuit: "encoders/enc_circuit.pkl"
+    constructor: "encoders/enc_constructor.pkl"
+    driver: "encoders/enc_driver.pkl"
+
+  neural_network:
+    circuit: "encoders/enc_mlp_circuit.pkl"
+    constructor: "encoders/enc_mlp_constructor.pkl"
+    driver: "encoders/enc_mlp_driver.pkl"
+
 default_values:
   grid_position: 5
 ```
-Používá se pro flexibilní načtení dat a modelu bez potřeby přepisovat kód.
 
 ---
 
-## ▶ Spuštění
+## ▶ Instalace a spuštění
 
-### Co je potřeba mít:
-- `Python 3.8+`
-- nainstalovaný modul `streamlit` (návod níže)
-- soubory:
-  - `streamlit_app.py`
-  - `f1_race_results.csv`
-  - `f1_winner_model.pkl`
-  - `enc_circuit.pkl`
-  - `enc_constructor.pkl`
-  - `enc_driver.pkl`
-  - `config.yaml`
+###  Instalace knihoven
+Projekt používá soubor `requirements.txt`, kde jsou uvedeny všechny potřebné knihovny.
 
-### 🧪 Jak ověřit, že je nainstalován Streamlit:
+#### 1. Vytvoření prostředí (volitelne):
 ```bash
-streamlit --version
+python -m venv .venv
 ```
 
-### ❌ Pokud není nainstalován:
+#### 2. Aktivace prostředí:
+#####  macOS/Linux:
 ```bash
-pip install streamlit
+source .venv/bin/activate
 ```
-**nebo (pokud nejsou admin práva):**
+#####  Windows:
 ```bash
-pip install --user streamlit
+.venv\Scripts\activate
 ```
 
-### ▶ Spuštění aplikace:
+#### 3. Instalace knihoven:
 ```bash
-streamlit run streamlit_app.py
+pip install -r requirements.txt
+```
+
+---
+
+### Spuštění aplikace:
+```bash
+streamlit run main.py
+
+cd /Users/filipnejedly/Documents/Python/Omega
+streamlit run app/main.py
+
 ```
 Aplikace se automaticky otevře v prohlížeči.
 
 ---
 
-## 📁 Veškeré soubory
-- `f1_race_results.csv`
-- `train_model.py`
-- `streamlit_app.py`
-- `config.yaml`
-- `f1_winner_model.pkl`
-- `enc_circuit.pkl`, `enc_constructor.pkl`, `enc_driver.pkl`
-- `f1_prediction_colab_vizualizace.ipynb` (notebook)
-- `README.md` s návodem ke spuštění (volitelně)
+##  Struktura projektu
+```
+Omega/
+├── app/
+│   └── main.py
+├── models/
+│   ├── f1_winner_model.pkl
+│   └── f1_mlp_model.pkl
+├── encoders/
+│   └── *.pkl
+├── notebooks/
+│   ├── F1_Omega_MLP_colab.ipynb
+│   └── F1_Omega_RNDFORST_colab.ipynb
+├── scripts/
+│   ├── train_model.py
+│   ├── train_mlp_model.py
+│   └── compare_models.py
+├── f1_race_results.csv
+├── config.yaml
+├── requirements.txt
+└── README.md
+```
 
 ---
 
-## ✍️ Autor
+## Autor
 **Filip Nejedlý**  
 Projekt: Predikce vítěze závodu F1 pomocí strojového učení
