@@ -5,7 +5,7 @@ import pandas as pd
 import sys
 sys.path.insert(0, 'vendor')
 
-# Načteme model a encodery
+# Načtení modelu a encodery
 model = joblib.load("../models/f1_winner_model.pkl")
 enc_circuit = joblib.load("../encoders/enc_circuit.pkl")
 enc_constructor = joblib.load("../encoders/enc_constructor.pkl")
